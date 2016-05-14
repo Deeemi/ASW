@@ -1,0 +1,24 @@
+# CONFIGURAZIONE DEL NODO DATABASE CON POSTGRES SQL VERSIONE 9.2
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+# OS CONFIG: trusty64
+config.vm.box = "ubuntu/trusty64"
+
+# NODE CONFIG: nodo database con nome database
+ config.vm.define "database" do |node|
+    node.vm.hostname = "database"
+
+
+# NETWORK CONFIG: definizione della private_network con indirizzo ip specificato
+config.vm.network "private_network", ip: "192.168.33.23", guest: 5555, host:5432
+
+ node.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+  end
+
+# PROVISIONING
+  config.vm.provision :shell, path: "bootstrap.sh"
+  end
+end

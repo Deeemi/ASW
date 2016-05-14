@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www/html":{"guestpath":"/var/www/html","hostpath":"/Users/davidedimeco/Desktop/COLLEGE & JOB/PROGETTI/ASW1516/DEVELOP/ASW1516/server/asw/var/www/html","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/davidedimeco/Desktop/COLLEGE & JOB/PROGETTI/ASW1516/DEVELOP/ASW1516/server","disabled":false,"__vagrantfile":true}}}

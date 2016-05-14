@@ -1,0 +1,30 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # OS CONFIG: trusty64
+  config.vm.box = "ubuntu/trusty64"
+
+  # SYNC FOLDER CONFIG
+  config.vm.synced_folder "./asw/var/www/html", "/var/www/html"
+
+  # NODE CONFIG: definizione nodo server con nome server
+  config.vm.define "server" do |node|
+    node.vm.hostname = "server"
+
+  # NETWORK CONFIG: definizione della private_network con indirizzo ip specificato
+  node.vm.network "private_network", ip: "192.168.33.22", virtualbox__intet: true
+  
+  node.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+  end
+
+  node.vm.network "forwarded_port", guest:22, host:2211, id:'ssh', auto_correct:true
+  node.ssh.forward_agent = true
+
+  node.vm.network "forwarded_port", guest:80, host:8080, id:'http', auto_correct:true
+
+  # PROVISIONING
+  config.vm.provision :shell, path: "bootstrap.sh"
+  end
+end
